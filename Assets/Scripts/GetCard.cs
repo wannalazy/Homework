@@ -23,15 +23,29 @@ namespace WRX
         // 每一幀更新時執行的函式
         private void Update()
         {
-            // 如果要透過鼠標點擊來觸發抽卡，可以解開下面的註解
-            // if (Input.GetKeyUp(KeyCode.Mouse0))
-            //{
-            // 隨機生成一個範圍數字
-            int randomNumber = Random.Range(1, 200200);
+            // 單抽：如果是左鍵點擊
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                // 隨機生成一個範圍數字
+                int randomNumber = Random.Range(1, 200200);
 
-            // 呼叫 Range 函式來處理抽卡邏輯
-            Range(randomNumber);
-            //}
+                // 呼叫 Range 函式來處理單抽邏輯
+                Range(randomNumber);
+            }
+
+            // 十抽：如果是右鍵點擊
+            if (Input.GetKeyUp(KeyCode.Mouse1))
+            {
+                // 進行十次抽卡
+                for (int i = 0; i < 10; i++)
+                {
+                    // 隨機生成一個範圍數字
+                    int randomNumber = Random.Range(1, 200200);
+
+                    // 呼叫 Range 函式來處理十抽邏輯
+                    Range(randomNumber);
+                }
+            }
         }
 
         // 根據隨機數字範圍來確定抽到的卡片種類
@@ -101,11 +115,8 @@ namespace WRX
             // 顯示遊戲結束訊息
             Debug.Log("<color=#FF0000>遊戲結束！<color>");
 
-            // 結束遊戲或關閉應用程式（僅在 Unity 編輯器中有效）
-            // EditorApplication.isPlaying = false;
-
-            // 結束遊戲或關閉應用程式（僅在 執行畫面 中有效）
-            // Application.Quit() 
+            // 結束遊戲或關閉應用程式
+            EditorApplication.isPlaying = false;
         }
     }
 }
